@@ -1,71 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Chronicles - Shadow Protocol</title>
     <style>
-        body {
-            background-color: #050505;
-            color: #00ff41;
-            font-family: 'Courier New', monospace;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-shadow: 0 0 5px #00ff41;
-        }
-        .container {
-            border: 1px solid #00ff41;
-            padding: 2rem;
-            background: rgba(0, 20, 0, 0.9);
-            box-shadow: 0 0 20px #00ff41;
-            max-width: 80%;
-            text-align: center;
-        }
-        #quote-box {
-            font-size: 1.5rem;
-            margin: 20px 0;
-            min-height: 100px;
-            font-weight: bold;
-        }
-        .glitch {
-            font-size: 0.8rem;
-            color: #888;
-            text-transform: uppercase;
-        }
+        body { background:#050505; color:#00ff41; font-family:monospace; display:flex; justify-content:center; align-items:center; height:100vh; margin:0; text-shadow:0 0 5px #00ff41; }
+        .box { border:1px solid #00ff41; padding:20px; text-align:center; box-shadow:0 0 20px #00ff41; max-width:350px; }
+        input { background:#000; color:#00ff41; border:1px solid #00ff41; padding:10px; margin:5px 0; width:100%; box-sizing:border-box; }
+        button { background:#00ff41; color:#000; border:none; padding:12px; width:100%; font-weight:bold; cursor:pointer; margin-top:10px; }
+        .hidden { display:none; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="glitch">PHOENIX RISING // TIER 4 ACTIVE</div>
-        <div id="quote-box">"Initialising..."</div>
-        <div class="glitch">COCKED. LOCKED. READY TO ROCK.</div>
+    <div class="box" id="gate">
+        <h3>PHOENIX GATEWAY</h3>
+        <input type="text" id="name" placeholder="FULL NAME">
+        <input type="text" id="tool" placeholder="FAVORITE TOOL">
+        <button onclick="deploy()">ENGAGE PROTOCOL</button>
+    </div>
+    <div class="box hidden" id="sanctum">
+        <p id="quote">"Initialising..."</p>
     </div>
 
     <script>
+        // TARGET LINE: PASTE YOUR KEY INSIDE THE QUOTES BELOW
+        const MASTER_KEY = AIzaSyBbRYkEe2oLXOgcDpGm39fmlT_zLLr9xvI
         const quotes = [
             "Diesel to fuel the Dream.",
-            "Stand tall, stay dangerous, and keep the Phoenix rising.",
-            "Own nothing, control everything.",
-            "I am the steel, you are the fire.",
-            "One shot. One kill. Move to next target.",
-            "The Statistical Miracle.",
-            "Dignity as a Product.",
-            "War does not determine who is right – only who is left.",
-            "When the pin is pulled, Mr. Grenade is not our friend.",
-            "Lead the way General."
+            "Stand tall, stay dangerous.",
+            "War determines only who is left.",
+            "One shot. One kill."
         ];
 
-        function shuffle() {
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            document.getElementById('quote-box').innerText = `"${randomQuote}"`;
+        function deploy() {
+            const n = document.getElementById('name').value;
+            const t = document.getElementById('tool').value;
+            if(n && t) {
+                document.getElementById('gate').classList.add('hidden');
+                document.getElementById('sanctum').classList.remove('hidden');
+                startQuotes();
+            }
         }
 
-        shuffle();
-        setInterval(shuffle, 5000);
+        function startQuotes() {
+            setInterval(() => {
+                document.getElementById('quote').innerText = `"${quotes[Math.floor(Math.random()*quotes.length)]}"`;
+            }, 5000);
+        }
     </script>
 </body>
 </html>
